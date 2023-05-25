@@ -67,7 +67,7 @@ export default function Catalogue(props) {
       let availableShukranTmp = availableShukran + _get(rewards_transaction, 'accepted', 0) - _get(rewards_transaction, 'donated', 0);
       setAvailableShukran(availableShukranTmp);
 
-      const shukranToAED = Math.round(availableShukranTmp / conversion);
+      const shukranToAED = Math.floor(availableShukranTmp / conversion);
 
       const algolia = algoliaSearchApi({maxPrice: shukranToAED});
       algolia.then(
