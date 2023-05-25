@@ -1,12 +1,11 @@
 import { createMiddlewareSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { NextResponse } from 'next/server';
-import _get from 'lodash/get';
-import { supabaseConnection } from './utils/supabase';
+// import { supabaseConnection } from './utils/supabase';
 
 export async function middleware(req) {
   const res = NextResponse.next();
   const supabase = createMiddlewareSupabaseClient({ req, res });
-  const supabaseCon = supabaseConnection();
+  // const supabaseCon = supabaseConnection();
   const {data : {session}, error} = await supabase.auth.getSession();
   // console.log(session);
   if (!session) {
