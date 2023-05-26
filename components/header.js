@@ -86,7 +86,7 @@ function ResponsiveAppBar() {
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
+                color: '#FFF',
                 fontWeight: 700,
                 // letterSpacing: '.1rem',
                 color: 'inherit',
@@ -142,9 +142,9 @@ function ResponsiveAppBar() {
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
-                fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: '.3rem',
+                color: '#FFF',
+                letterSpacing: '.1rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
