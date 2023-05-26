@@ -40,7 +40,7 @@ export default function Catalogue(props) {
   const [products, setProducts] = useState([]);
   const user = useUser();
   const [availableShukran, setAvailableShukran] = useState(_get(props, 'shukran.0.sum', 0));
-  const conversion = _get(publicRuntimeConfig, 'conversion.shukran', 1000);
+  const conversion = _get(publicRuntimeConfig, 'conversion.shukran', 20);
 
   // let shukranToAED = Math.round(availableShukran / conversion);
 
