@@ -183,7 +183,7 @@ export default function Dashboard(props) {
                 (user && row.uuid === user.id) &&
                 <StyledTableRow key={`accepted-${row.id}`}>
                   <StyledTableCell component="th" scope="row">
-                    Points Accepted
+                    WOW Points Accepted
                   </StyledTableCell>
                   <StyledTableCell align="right">{_get(row, 'points', '')}</StyledTableCell>
                 </StyledTableRow>
@@ -192,7 +192,7 @@ export default function Dashboard(props) {
                 (user && row.assignee_uuid === user.id) &&
                 <StyledTableRow key={`donated-${row.id}`}>
                   <StyledTableCell component="th" scope="row">
-                    Points Donated
+                    Transfer WOW
                   </StyledTableCell>
                   <StyledTableCell align="right">-{_get(row, 'points', '')}</StyledTableCell>
                 </StyledTableRow>
