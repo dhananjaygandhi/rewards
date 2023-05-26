@@ -10,17 +10,24 @@ import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { supabaseConnection } from '../utils/supabase';
 import styles from '@/styles/Home.module.css';
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({req, res}) {
+  const supabaseServerClient = createServerSupabaseClient({
+    req,
+    res,
+  })
+  const {
+    data: { user },
+  } = await supabaseServerClient.auth.getUser();
+
   const supabase = supabaseConnection();
 
   const { data: employees, error } = await supabase
   .from('employees')
-  .select('*')
-
-  const { data: { user } } = await supabase.auth.getUser()
+  .select('*');
 
   return {props: {employees, error, user}};
 }
@@ -28,7 +35,7 @@ export async function getServerSideProps(context) {
 export default function Profile(props) {
   const router = useRouter();
   const employees = _get(props, 'employees', []);
-  const user = useUser();
+  const user = _get(props, 'user', {});
   const [supabase] = useState(() => supabaseConnection());
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -71,6 +78,10 @@ export default function Profile(props) {
     } else {
       setError(true);
     }
+  }
+
+  const goToDashBoard = () => {
+    router.reload();
   }
 
   return (
@@ -138,6 +149,10 @@ export default function Profile(props) {
           </Select>
           <Button variant="contained" size="large" onClick={handleSubmit}>
             Submit
+          </Button>
+          <br/>
+          <Button variant="contained" size="large" onClick={goToDashBoard}>
+            Go to Dashboard
           </Button>
         </Stack>
       </form>
