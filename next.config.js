@@ -5,7 +5,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     // Will be available on both server and client
     conversion: {
-      shukran: 500,
+      shukran: 20,
       aed: 1
     }
   }

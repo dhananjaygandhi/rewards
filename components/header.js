@@ -80,7 +80,7 @@ function ResponsiveAppBar() {
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Link href="/dashboard">
             <Typography
-              variant="h6"
+              variant="h5"
               noWrap
               className="product-card"
               sx={{
@@ -88,12 +88,12 @@ function ResponsiveAppBar() {
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: '.3rem',
+                // letterSpacing: '.1rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
             >
-              Reward tool
+              Winner's Circle
             </Typography>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

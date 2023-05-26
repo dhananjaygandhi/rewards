@@ -93,7 +93,7 @@ export default function Home() {
           <Container maxWidth="xs">
           <div className={styles.description}>
             <h2>
-              Employee Rewards Tool
+              Winner's Circle
             </h2>
           </div>
           {toast &&
