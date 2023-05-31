@@ -33,43 +33,37 @@ export async function getServerSideProps({req, res}) {
   .select('*')
   .or(`uuid.eq.${loggedinUserId},assignee_uuid.eq.${loggedinUserId}`)
 
-  return {props: {shukran, used_rewards}};
+  const rewards_transaction = used_rewards.reduce((reduced, item) => {
+    if(item.uuid === _get(user, 'id')) {
+      return {
+        ...reduced,
+        accepted: reduced.donated + item.points
+      };
+    }
+    if(item.assignee_uuid === _get(user, 'id')) {
+      return {
+        ...reduced,
+        donated: reduced.donated + item.points
+      };
+    }
+    return reduced;
+  }, {accepted: 0, donated: 0});
+
+  const availableShukran = _get(shukran, '0.sum', 0) + _get(rewards_transaction, 'accepted', 0) - _get(rewards_transaction, 'donated', 0);
+
+  return {props: {shukran, used_rewards, availableShukran}};
 }
 
 export default function Catalogue(props) {
   const [products, setProducts] = useState([]);
   const user = useUser();
-  const [availableShukran, setAvailableShukran] = useState(_get(props, 'shukran.0.sum', 0));
+  const availableShukran = _get(props, "availableShukran", 0);
   const conversion = _get(publicRuntimeConfig, 'conversion.shukran', 20);
 
-  // let shukranToAED = Math.round(availableShukran / conversion);
-
-  const used_rewards = _get(props, 'used_rewards', []);
+  const shukranToAED = Math.round(availableShukran / conversion);
 
   useEffect(() => {
-    const rewards_transaction = used_rewards.reduce((reduced, item) => {
-      if(item.uuid === _get(user, 'id')) {
-        return {
-          ...reduced,
-          accepted: reduced.donated + item.points
-        };
-      }
-      if(item.assignee_uuid === _get(user, 'id')) {
-        return {
-          ...reduced,
-          donated: reduced.donated + item.points
-        };
-      }
-      return reduced;
-    }, {accepted: 0, donated: 0});
-
-    if(user) {
-      let availableShukranTmp = availableShukran + _get(rewards_transaction, 'accepted', 0) - _get(rewards_transaction, 'donated', 0);
-      setAvailableShukran(availableShukranTmp);
-
-      const shukranToAED = Math.floor(availableShukranTmp / conversion);
-
-      const algolia = algoliaSearchApi({maxPrice: shukranToAED});
+    const algolia = algoliaSearchApi({maxPrice: shukranToAED});
       algolia.then(
         function(value) {
           setProducts(_get(value, "hits", []))
@@ -78,8 +72,7 @@ export default function Catalogue(props) {
           console.log(error);
         }
       );
-    }
-  }, [user]);
+  }, []);
 
   const list = products.map((p) => {
     return (
