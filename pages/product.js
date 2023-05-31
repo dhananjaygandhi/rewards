@@ -1,13 +1,19 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import getConfig from 'next/config';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 import { useRouter } from 'next/router';
 import _get from 'lodash/get';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import algoliaSearchApi from '../pages/api/algoliaObject';
 import { useUser } from '@supabase/auth-helpers-react';
 import { supabaseConnection } from '../utils/supabase';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -56,6 +62,7 @@ export default function Product(props) {
   const user = useUser();
   const pid = _get(router, 'query.pid', '');
   const [product, setProduct] = useState([]);
+  const [status, setStatus] = useState(false);
   const availableShukran = _get(props, "availableShukran", 0);
   const conversion = _get(publicRuntimeConfig, 'conversion.shukran', 1000);
 
@@ -70,6 +77,14 @@ export default function Product(props) {
         }
       );
   }, []);
+
+  const btnClick = () => {
+    setStatus(true);
+  }
+
+  const handleClose = () => {
+    setStatus(false);
+  }
 
   return (
     <>
@@ -87,9 +102,14 @@ export default function Product(props) {
           <p className="prod-price">
             {_get(product, "price", "") * conversion} Shukran
           </p>
-          <Button variant="contained">Buy Now</Button>
+          <Button variant="contained" onClick={btnClick}>Buy Now</Button>
         </Grid>
       </Grid>
+      <Snackbar open={status} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+        <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+          This is a dummy page!
+        </Alert>
+      </Snackbar>
     </>
   )
 }

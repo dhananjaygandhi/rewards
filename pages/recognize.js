@@ -44,7 +44,25 @@ export async function getServerSideProps({req, res}) {
   .select('*')
   .or(`uuid.eq.${loggedinUserId},assignee_uuid.eq.${loggedinUserId}`)
 
-  return {props: {employees, rewards, shukran, used_rewards}};
+  const rewards_transaction = used_rewards.reduce((reduced, item) => {
+    if(item.uuid === _get(user, 'id')) {
+      return {
+        ...reduced,
+        accepted: reduced.donated + item.points
+      };
+    }
+    if(item.assignee_uuid === _get(user, 'id')) {
+      return {
+        ...reduced,
+        donated: reduced.donated + item.points
+      };
+    }
+    return reduced;
+  }, {accepted: 0, donated: 0});
+
+  const availableShukran = _get(shukran, '0.sum', 0) + _get(rewards_transaction, 'accepted', 0) - _get(rewards_transaction, 'donated', 0);
+
+  return {props: {employees, rewards, shukran, used_rewards, availableShukran}};
 }
 
 export default function Dashboard(props) {
@@ -55,31 +73,7 @@ export default function Dashboard(props) {
   const user = useUser();
   const loggedinUser = useUserContext();
 
-  const [availableShukran, setAvailableShukran] = useState(_get(props, 'shukran.0.sum', 0));
-  const used_rewards = _get(props, 'used_rewards', []);
-
-  useEffect(() => {
-    const rewards_transaction = used_rewards.reduce((reduced, item) => {
-      if(item.uuid === _get(user, 'id')) {
-        return {
-          ...reduced,
-          accepted: reduced.donated + item.points
-        };
-      }
-      if(item.assignee_uuid === _get(user, 'id')) {
-        return {
-          ...reduced,
-          donated: reduced.donated + item.points
-        };
-      }
-      return reduced;
-    }, {accepted: 0, donated: 0});
-
-    if(rewards_transaction) {
-      let availableShukranTmp = availableShukran + _get(rewards_transaction, 'accepted', 0) - _get(rewards_transaction, 'donated', 0);
-      setAvailableShukran(availableShukranTmp);
-    }
-  }, [user]);
+  const [availableShukran, setAvailableShukran] = useState(_get(props, 'availableShukran', 0));
 
   const [credentials, setCredentials] = useState({
     'emp' : '',
@@ -127,7 +121,6 @@ export default function Dashboard(props) {
       setStatus('formError');
     }
   }
-
 
   const handleDonateChange = (e) => {
     const fieldName = e.target.name;

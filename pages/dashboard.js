@@ -155,7 +155,7 @@ export default function Dashboard(props) {
   return (
     <NoSsr>
       <Stack spacing={2}>
-        <h3>Total points earned</h3>
+        <h3>Shukran details</h3>
         {(empRewards.length > 0 || used_rewards.length > 0) ?
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">

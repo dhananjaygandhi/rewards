@@ -159,7 +159,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          All Employees Shukran Points
+          Employees Earned Shukran Points
         </Typography>
       )}
 
