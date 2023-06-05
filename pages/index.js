@@ -92,13 +92,13 @@ export default function Home() {
       <main className={styles.main}>
         <NoSsr>
           <Container maxWidth="xs">
-          <Image
-            src="/logo2.png"
-            width={96}
-            height={66}
-            alt="Logo"
-          />
           <div className={styles.description}>
+            <Image
+              src="/logo.png"
+              width={96}
+              height={66}
+              alt="Logo"
+            />
             <h2>
               Winner's Circle
             </h2>
