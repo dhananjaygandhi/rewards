@@ -14,9 +14,11 @@ export default function App({ Component, pageProps }) {
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <SessionContextProvider supabaseClient={supabaseClient} initialSession={pageProps.initialSession} >
+      <div className={"layout-root"}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      </div>
     </SessionContextProvider>
   </ThemeProvider>
 )}

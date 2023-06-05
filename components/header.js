@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import _get from 'lodash/get';
 import AppBar from '@mui/material/AppBar';
+import Image from 'next/image';
 import { green } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,7 +17,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import PersonIcon from '@mui/icons-material/Person';
 import { useUser } from '@supabase/auth-helpers-react';
 
@@ -74,10 +74,16 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Image
+            src="/logo.png"
+            width={45}
+            height={30}
+            alt="Picture of the author"
+            className={"logo-sm"}
+          />
           <Link href="/dashboard">
             <Typography
               variant="h5"
@@ -126,13 +132,24 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.key} onClick={handleNavMenu(page.key)}>
-                  <Typography textAlign="center">{page.name}</Typography>
+                <MenuItem
+                  key={page.key}
+                  onClick={handleNavMenu(page.key)}
+                  selected={`/${page.key}` === _get(router, "pathname" , "/") ? true : false}
+                  className={`/${page.key}` === _get(router, "pathname" , "/") ? "selected" : ""}
+                >
+                  <Typography textAlign="center" className="camelcase">{`/${page.key}`}{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Image
+            src="/logo.png"
+            width={45}
+            height={30}
+            alt="Picture of the author"
+            className={"logo-xs"}
+          />
           <Link href="/dashboard">
             <Typography
               variant="h5"
@@ -158,6 +175,8 @@ function ResponsiveAppBar() {
                 key={page.key}
                 onClick={handleNavMenu(page.key)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                selected={`/${page.key}` === _get(router, "pathname" , "/") ? true : false}
+                className={`/${page.key}` === _get(router, "pathname" , "/") ? "camelcase selected" : "camelcase"}
               >
                 {page.name}
               </Button>

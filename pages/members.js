@@ -57,12 +57,12 @@ export default function Members(props) {
       </div>
       <br />
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: 300 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">Department</StyledTableCell>
-              <StyledTableCell align="right">Role</StyledTableCell>
+              <StyledTableCell className="table-head">Name</StyledTableCell>
+              <StyledTableCell align="right" className="table-head">Department</StyledTableCell>
+              <StyledTableCell align="right" className="table-head">Role</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

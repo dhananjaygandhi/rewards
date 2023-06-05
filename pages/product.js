@@ -105,7 +105,7 @@ export default function Product(props) {
           <Button variant="contained" onClick={btnClick}>Buy Now</Button>
         </Grid>
       </Grid>
-      <Snackbar open={status} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+      <Snackbar open={status} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
         <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
           This is a dummy page!
         </Alert>

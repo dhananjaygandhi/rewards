@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import NoSsr from '@mui/base/NoSsr';
 import _get from 'lodash/get';
+import _includes from 'lodash/includes';
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import Alert from '@mui/material/Alert';
@@ -14,6 +15,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { useUser } from '@supabase/auth-helpers-react';
+import {
+  LinkedinShareButton, LinkedinIcon
+} from "react-share";
 import { supabaseConnection } from '../utils/supabase';
 // import { useUserContext } from '../contexts/userContext';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
@@ -161,8 +165,9 @@ export default function Dashboard(props) {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>Reward</StyledTableCell>
-                <StyledTableCell align="right">Points</StyledTableCell>
+                <StyledTableCell className="table-head">Reward</StyledTableCell>
+                <StyledTableCell align="right" className="table-head">Points</StyledTableCell>
+                <StyledTableCell align="right" className="table-head">Celebrate</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -172,6 +177,18 @@ export default function Dashboard(props) {
                     {_get(row, 'rewards.name', '')}
                   </StyledTableCell>
                   <StyledTableCell align="right">{_get(row, 'rewards.value', '')}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    {(_includes(_get(row, 'rewards.name', ''), 'GEM') || _includes(_get(row, 'rewards.name', ''), 'Kudos'))  &&
+                    <LinkedinShareButton
+                      url={`${window.location.href}`}
+                    >
+                      <div className="celebrate-btn">
+                        Celebrate on Linkedin
+                        <LinkedinIcon size={32} round={true} />
+                      </div>
+                    </LinkedinShareButton>
+                    }
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
               {used_rewards.map((row) => (
@@ -181,6 +198,7 @@ export default function Dashboard(props) {
                     WOW Points Accepted
                   </StyledTableCell>
                   <StyledTableCell align="right">{_get(row, 'points', '')}</StyledTableCell>
+                  <StyledTableCell align="right"></StyledTableCell>
                 </StyledTableRow>
               ))}
               {used_rewards.map((row) => (
@@ -190,6 +208,7 @@ export default function Dashboard(props) {
                     Transfer WOW
                   </StyledTableCell>
                   <StyledTableCell align="right">-{_get(row, 'points', '')}</StyledTableCell>
+                  <StyledTableCell align="right"></StyledTableCell>
                 </StyledTableRow>
               ))}
               <StyledTableRow>
@@ -213,12 +232,12 @@ export default function Dashboard(props) {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>Employee Name</StyledTableCell>
-                <StyledTableCell align="right">Department</StyledTableCell>
-                <StyledTableCell align="right">Role</StyledTableCell>
-                <StyledTableCell align="right">Reward</StyledTableCell>
-                <StyledTableCell align="right">Approve</StyledTableCell>
-                <StyledTableCell align="right">Reject</StyledTableCell>
+                <StyledTableCell className="table-head">Employee Name</StyledTableCell>
+                <StyledTableCell align="right" className="table-head">Department</StyledTableCell>
+                <StyledTableCell align="right" className="table-head">Role</StyledTableCell>
+                <StyledTableCell align="right" className="table-head">Reward</StyledTableCell>
+                <StyledTableCell align="right" className="table-head">Approve</StyledTableCell>
+                <StyledTableCell align="right" className="table-head">Reject</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Head from 'next/head';
 import _get from 'lodash/get';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
@@ -91,6 +92,12 @@ export default function Home() {
       <main className={styles.main}>
         <NoSsr>
           <Container maxWidth="xs">
+          <Image
+            src="/logo.png"
+            width={96}
+            height={66}
+            alt="Picture of the author"
+          />
           <div className={styles.description}>
             <h2>
               Winner's Circle
@@ -136,7 +143,8 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={12}>
                   <LoadingButton
-                    size="small"
+                    fullWidth
+                    size="large"
                     onClick={handleClick}
                     endIcon={<SendIcon />}
                     loading={loading}

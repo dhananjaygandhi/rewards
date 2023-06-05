@@ -35,7 +35,7 @@ export default function Layout({children}) {
       {!(router.pathname === "/" || router.pathname === "/profile") &&
         <Header user={user} />
       }
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className="no-bg">
         <Box paddingTop="20px">{children}</Box>
       </Container>
       </NoSsr>
