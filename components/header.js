@@ -81,27 +81,25 @@ function ResponsiveAppBar() {
             src="/logo.png"
             width={45}
             height={30}
-            alt="Picture of the author"
+            alt="Logo"
             className={"logo-sm"}
           />
-          <Link href="/dashboard">
-            <Typography
-              variant="h5"
-              noWrap
-              className="product-card"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                color: '#FFF',
-                fontWeight: 700,
-                // letterSpacing: '.1rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              Winner's Circle
-            </Typography>
-          </Link>
+          <Typography
+            variant="h5"
+            noWrap
+            className="product-card"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              color: '#FFF',
+              fontWeight: 700,
+              // letterSpacing: '.1rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            Winner's Circle
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"

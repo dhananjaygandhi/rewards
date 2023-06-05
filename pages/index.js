@@ -96,7 +96,7 @@ export default function Home() {
             src="/logo.png"
             width={96}
             height={66}
-            alt="Picture of the author"
+            alt="Logo"
           />
           <div className={styles.description}>
             <h2>
