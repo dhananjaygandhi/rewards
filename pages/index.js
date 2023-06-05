@@ -90,19 +90,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <NoSsr>
           <Container maxWidth="xs">
           <div className={styles.description}>
             <Image
               src="/logo.png"
-              width={45}
-              height={30}
+              width={96}
+              height={66}
               alt="Logo"
             />
             <h2>
               Winner's Circle
             </h2>
           </div>
+          <NoSsr>
           {toast &&
             <Snackbar open={toast} autoHideDuration={6000} onClose={toastClose} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
               <Alert severity="error">Please enter valid email and password!</Alert>
@@ -157,8 +157,8 @@ export default function Home() {
               </Grid>
             </form>
           </div>
+          </NoSsr>
           </Container>
-        </NoSsr>
       </main>
     </>
   )
