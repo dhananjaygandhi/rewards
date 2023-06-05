@@ -73,3 +73,8 @@ a:active { text-decoration: none; }
 .table-head {
   font-weight: 600 !important;
 }
+
+.login-logo {
+  background: url("./../public/logo.png") center center no-repeat;
+  background-size: contain;
+}

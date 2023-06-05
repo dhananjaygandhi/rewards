@@ -5,6 +5,7 @@ import Head from 'next/head';
 import _get from 'lodash/get';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -92,12 +93,7 @@ export default function Home() {
       <main className={styles.main}>
           <Container maxWidth="xs">
           <div className={styles.description}>
-            <Image
-              src="/logo.png"
-              width={96}
-              height={66}
-              alt="Logo"
-            />
+            <Box width="96px" height="66px" className="login-logo"></Box>
             <h2>
               Winner's Circle
             </h2>
