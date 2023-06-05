@@ -95,8 +95,8 @@ export default function Home() {
           <div className={styles.description}>
             <Image
               src="/logo.png"
-              width={96}
-              height={66}
+              width={45}
+              height={30}
               alt="Logo"
             />
             <h2>

@@ -145,7 +145,7 @@ function ResponsiveAppBar() {
             src="/logo.png"
             width={45}
             height={30}
-            alt="Picture of the author"
+            alt="Logo"
             className={"logo-xs"}
           />
           <Link href="/dashboard">
