@@ -93,7 +93,7 @@ export default function Home() {
         <NoSsr>
           <Container maxWidth="xs">
           <Image
-            src="/logo.png"
+            src="/logo2.png"
             width={96}
             height={66}
             alt="Logo"
@@ -113,7 +113,7 @@ export default function Home() {
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
-                    fullWidth 
+                    fullWidth
                     label='Email'
                     id="user-email"
                     name='email'
