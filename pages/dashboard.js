@@ -183,7 +183,7 @@ export default function Dashboard(props) {
                       url={`${window.location.href}`}
                     >
                       <div className="celebrate-btn">
-                        Celebrate on Linkedin
+                        Celebrate on LinkedIn
                         <LinkedinIcon size={32} round={true} />
                       </div>
                     </LinkedinShareButton>
